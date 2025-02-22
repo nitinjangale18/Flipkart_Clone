@@ -1,0 +1,20 @@
+services:
+  - name: backend
+    type: web
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: MONGO_URI
+        value: "your-mongodb-uri"
+      - key: PORT
+        value: "8000"
+
+  - name: frontend
+    type: web
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: "https://backend.onrender.com"
